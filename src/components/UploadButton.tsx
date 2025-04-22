@@ -8,10 +8,8 @@ export const UploadButton = () => {
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      validationStore.validate(file).then(() => {
-        navigate("/result");
-      });
-      // navigate("/loading");
+      validationStore.validate(file)
+     navigate("/result");
     }
   };
 

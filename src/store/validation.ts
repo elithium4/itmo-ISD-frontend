@@ -20,18 +20,18 @@ class ValidationStore {
 
     try {
       const token = "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiVVNFUiIsImlkIjoyLCJlbWFpbCI6InplbGkuYm9ia2FAcG9jaHRhLnJ1Iiwic3ViIjoiWmVsaWJvYmthIiwiaWF0IjoxNzQ1MjYzNzIyLCJleHAiOjE3NDc4NTU3MjJ9.ozdlNq7d4IWhMSONWlV1pN_5zIfU7cf2MZR65vpH1CE"
-      const response = await fetch(`${process.env.FRONTEND_URL}/images/upload`, {
-        method: "POST",
-        body: formData,
-        headers: {
-          'Authorization': `Bearer ${token}`,
-      }
-      });
+      // const response = await fetch(`${import.meta.env.VITE_FRONTEND_URL}/images/upload`, {
+      //   method: "POST",
+      //   body: formData,
+      //   headers: {
+      //     'Authorization': `Bearer ${token}`,
+      // }
+      // });
 
-      const data = await response.json();
-      this.result = data.result;
-      this.probability = data.probability;
-      this.fileName = data.fileName;
+      // const data = await response.json();
+      // this.result = data.result;
+      // this.probability = data.probability;
+      // this.fileName = data.fileName;
     } catch (e) {
       console.error("Validation failed", e);
     } finally {
