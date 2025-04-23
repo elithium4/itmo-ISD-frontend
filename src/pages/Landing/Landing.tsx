@@ -1,16 +1,25 @@
 import css from "./Landing.module.scss";
-import { UploadButton } from "../../components/UploadButton";
+import { UploadButton } from "../../components/UploadButton/UploadButton";
 import { Header } from "../../components/Header/Header";
 import { Features } from "../../components/Features/Features";
 import { StarsContainer } from "../../components/StarsContainer/StarsContainer";
 import { useRef } from "react";
+import { authStore } from "../../store/auth";
+import { AuthModal } from "../../components/AuthModal/AuthModal";
+import { observer } from "mobx-react-lite";
 
-export const Landing = () => {
+export const Landing = observer(function Landing() {
   const heroSection = useRef<HTMLDivElement>(null);
 
   return (
     <div className={css.landing}>
-      <Header alwaysVisible={false} dependencyBlock={heroSection}/>
+      {authStore.authModalMode && (
+        <AuthModal
+          mode={authStore.authModalMode}
+          onClose={() => authStore.setAuthModalMode(null)}
+        />
+      )}
+      <Header alwaysVisible={false} dependencyBlock={heroSection} />
       <section className={css.hero} ref={heroSection}>
         <StarsContainer />
         <div className={css.title}>
@@ -32,7 +41,7 @@ export const Landing = () => {
           используем передовые методы машинного обучения для анализа фотографий
           и определения их подлинности. Наша модель обучена на большом
           количестве дипфейков и реальных изображений, что позволяет достигать
-          точности более 98%. 
+          точности более 98%.
         </p>
       </section>
 
@@ -60,4 +69,4 @@ export const Landing = () => {
       </footer>
     </div>
   );
-};
+});
