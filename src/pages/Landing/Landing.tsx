@@ -21,7 +21,7 @@ export const Landing = () => {
           </p>
         </div>
         <div className={css.uploadWrapper}>
-          <UploadButton />
+          <UploadButton title="Загрузить изображение" />
         </div>
       </section>
 

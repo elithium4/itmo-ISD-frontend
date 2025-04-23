@@ -6,5 +6,6 @@
 
 body {
   margin:  0;
-  background: #f8f9fa;;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #305877 0%, #0c0014 50%, #12031d 100%);
 }

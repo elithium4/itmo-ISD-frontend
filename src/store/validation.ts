@@ -1,10 +1,14 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
+
+export type ValidationResult = {
+  fileName: string;
+  result: "fake" | "real";
+  probability: number;
+};
 
 class ValidationStore {
   file: File | null = null;
-  result: "real" | "fake" | null = null;
-  probability: number | null = null;
-  fileName: string = "";
+  result: ValidationResult | null = null;
   loading = false;
 
   constructor() {
@@ -12,26 +16,38 @@ class ValidationStore {
   }
 
   async validate(file: File) {
-    this.loading = true;
-    this.file = file;
+    runInAction(() => {
+      this.loading = true;
+      this.file = file;
+    });
 
     const formData = new FormData();
     formData.append("file", file);
 
     try {
-      const token = "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiVVNFUiIsImlkIjoyLCJlbWFpbCI6InplbGkuYm9ia2FAcG9jaHRhLnJ1Iiwic3ViIjoiWmVsaWJvYmthIiwiaWF0IjoxNzQ1MjYzNzIyLCJleHAiOjE3NDc4NTU3MjJ9.ozdlNq7d4IWhMSONWlV1pN_5zIfU7cf2MZR65vpH1CE"
-      // const response = await fetch(`${import.meta.env.VITE_FRONTEND_URL}/images/upload`, {
-      //   method: "POST",
-      //   body: formData,
-      //   headers: {
-      //     'Authorization': `Bearer ${token}`,
-      // }
-      // });
+      const token =
+        "";
+      const response = await fetch(`${import.meta.env.VITE_FRONTEND_URL}/images/upload`, {
+        method: "POST",
+        body: formData,
+        headers: {
+          'Authorization': `Bearer ${token}`,
+      }
+      });
 
-      // const data = await response.json();
-      // this.result = data.result;
-      // this.probability = data.probability;
-      // this.fileName = data.fileName;
+      // MOCK FOR TESTING
+      // setTimeout(() => {
+      //   this.result = {
+      //     result: "real",
+      //     probability: 0.932,
+      //     fileName: "java.jpg",
+      //   };
+      //   this.loading = false;
+      // }, 2000);
+
+      const data = await response.json();
+      this.result = data;
+      this.loading = false;
     } catch (e) {
       console.error("Validation failed", e);
     } finally {
@@ -42,8 +58,7 @@ class ValidationStore {
   reset() {
     this.file = null;
     this.result = null;
-    this.probability = null;
-    this.fileName = "";
+    this.loading = false;
   }
 }
 

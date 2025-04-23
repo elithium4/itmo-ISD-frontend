@@ -39,25 +39,21 @@ export const Features = () => {
           {
             title: "Высокая точность",
             text: "Модель показывает более 98% точности при детекции дипфейков",
-            icon: "/icons/accuracy.svg",
             side: "left",
           },
           {
             title: "Мгновенная проверка",
             text: "Вы получаете результат почти сразу — за считаные секунды",
-            icon: "/icons/speed.svg",
             side: "right",
           },
           {
             title: "Интеллектуальная аналитика",
             text: "вы получаете вероятность подделки в процентах — чтобы понимать, насколько фото вызывает сомнения",
-            icon: "/icons/security.svg",
             side: "left",
           },
           {
             title: "Кроссплатформенность",
             text: "Удобно пользоваться как на компьютере, так и с телефона — неважно, где вы находитесь",
-            icon: "/icons/cross-platform.svg",
             side: "right",
           },
         ].map((feature, index) => (
@@ -66,9 +62,6 @@ export const Features = () => {
             className={`${css.featureItem} ${css[feature.side]}`} 
             ref={(el) => setFeatureRef(el, index)}
           >
-            <div className={css.icon}>
-              <img src={feature.icon} alt={feature.title} />
-            </div>
             <div className={css.text}>
               <h3>{feature.title}</h3>
               <p>{feature.text}</p>

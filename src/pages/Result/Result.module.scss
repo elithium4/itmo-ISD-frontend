@@ -1,127 +1,149 @@
 .page {
-    background-color: #f8f9fa;
     padding: 4rem 2rem;
     font-family: "Segoe UI", sans-serif;
     display: flex;
     justify-content: center;
     align-items: start;
-}
+    color: #fff;
+    height: 100%;
+    padding-top: 12rem;
 
-.container {
-    max-width: 960px;
-    width: 100%;
-    text-align: center;
-
-    h1 {
-        font-size: 2.5rem;
-        margin-bottom: 3rem;
-        color: #0f2027;
-    }
-}
-
-.resultCard {
-    display: flex;
-    flex-wrap: wrap;
-    background-color: #ffffff;
-    border-radius: 16px;
-    overflow: hidden;
-    text-align: left;
-    position: relative;
-    z-index: 1;
-    transition: box-shadow 0.3s ease;
-
-    .imageWrapper {
-        flex: 1 1 300px;
-        background-color: #eaeaea;
-        img {
-            display: block;
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        &::before {
-            content: "";
-            position: absolute;
-            z-index: -1;
-            inset: 0;
-            border-radius: 16px;
-            opacity: 0.6;
-            filter: blur(24px);
-            transition: background-color 0.3s ease;
-        }
+    .loadingIndicator {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
     }
 
-    .info {
-        flex: 1 1 300px;
-        padding: 2rem;
+    .loaderContainer {
+        width: 100px;
+        height: 100px;
+    }
 
-        .status {
-            display: inline-block;
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: #fff;
-            padding: 1rem;
-            border-radius: 10px;
-        }
+    .container {
+        display: flex;
+        gap: 7rem;
+        flex-wrap: wrap;
+        align-items: center;
+        max-width: 1000px;
 
-        .fake {
-            background-color: #d32f2f;
-        }
-
-        .real {
-            background-color: #388e3c;
-        }
-
-        .probability {
-            font-size: 1.2rem;
-            color: #555;
-            margin-bottom: 2rem;
-        }
-
-        .backButton {
-            background-color: #0f2027;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            padding: 0.9rem 1.5rem;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background-color 0.3s;
-
-            &:hover {
-                background-color: #1a3540;
+        .imageContainer {
+            width: 300px;
+            height: 300px;
+            border-radius: 1rem;
+            overflow: hidden;
+            position: relative;
+            flex-shrink: 0;
+        
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        
+            &::before {
+                content: "";
+                position: absolute;
+                inset: -5px;
+                border-radius: 1.2rem;
+                background: var(--glow-color);
+                filter: blur(10px);
+                opacity: 0.6;
+                animation: pulse 2s infinite ease-in-out;
+                z-index: -1;
             }
         }
-    }
-}
 
-.resultCard {
-    display: flex;
-    flex-wrap: wrap;
-    background-color: #ffffff;
-    border-radius: 16px;
-    overflow: hidden;
-    text-align: left;
-    position: relative;
-    z-index: 1;
-    padding: 2rem;
-    border: 2px solid transparent;
-    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+        .infoContainer {
+            flex: 1;
+            min-width: 260px;
+        
+            .resultTitle {
+                font-size: 1.8rem;
+                margin-bottom: 1rem;
+            }
+        
+            .status {
+                display: inline-block;
+                font-size: 1.2rem;
+                font-weight: 600;
+                margin-bottom: 1rem;
+                color: #fff;
+                padding: 1rem;
+                border-radius: 10px;
+            }
+    
+            .fake {
+                background-color: #d32f2f;
+            }
+    
+            .real {
+                background-color: #388e3c;
+            }
+
+            .resultValue {
+                font-size: 1.5rem;
+                margin-bottom: 0.5rem;
+                color: #90ee90;
+            }
+        
+            .resultComment {
+                font-size: 1.2rem;
+                margin-bottom: 0.5rem;
+            }
+        
+            .details {
+                font-size: 0.95rem;
+                color: #ccc;
+                margin-bottom: 3rem;;
+                margin-top: 0.5rem;
+        
+                p {
+                    margin: 0.3rem 0;
+                }
+            }
+
+        }
+    }
+
+    .description {
+        font-size: 0.7rem;
+    }
+
+    .ErrorMessage {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+
+        .warning {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .title {
+                font-size: 2.5rem;
+                margin-bottom: 0.5rem;
+                font-weight: bold;
+            }
+            .info {
+                font-size: 1.2rem;
+            }
+        
+        }
+    }
 }
 
 @keyframes neonPulseRed {
     0% {
-      box-shadow: 0 0 12px #f44336, 0 0 24px #ff7961;
+        box-shadow: 0 0 12px #f44336, 0 0 24px #ff7961;
     }
     50% {
-      box-shadow: 0 0 16px #f44336, 0 0 32px #ff7961;
+        box-shadow: 0 0 16px #f44336, 0 0 32px #ff7961;
     }
     100% {
-      box-shadow: 0 0 12px #f44336, 0 0 24px #ff7961;
+        box-shadow: 0 0 12px #f44336, 0 0 24px #ff7961;
     }
-  }
+}
 
 @keyframes neonPulseGreen {
     0% {
@@ -139,10 +161,20 @@
     animation: neonPulseRed 2s infinite alternate;
     border-color: #f44336;
     box-shadow: 0 0 12px #f44336, 0 0 24px #ff7961;
-  }
+}
 
 .glowReal {
     animation: neonPulseGreen 2s infinite alternate;
     border-color: #66bb6a;
     box-shadow: 0 0 12px #66bb6a, 0 0 24px #a5d6a7;
 }
+@keyframes pulse {
+    0%,
+    100% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 0.9;
+    }
+}
+

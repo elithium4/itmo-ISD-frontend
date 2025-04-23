@@ -24,7 +24,7 @@ export const Header = ({ alwaysVisible, dependencyBlock }: HeaderProps) => {
 
   return showHeader ? 
         <header className={css.Header}>
-          <div className={css.logo}><Logo/></div>
+          <a className={css.logo} href="/"><Logo/></a>
           <div className={css.actions}>
             <button className={css.login}>Войти</button>
             <button className={css.register}>Регистрация</button>
