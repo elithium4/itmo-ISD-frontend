@@ -3,12 +3,15 @@ import { UploadButton } from "../../components/UploadButton";
 import { Header } from "../../components/Header/Header";
 import { Features } from "../../components/Features/Features";
 import { StarsContainer } from "../../components/StarsContainer/StarsContainer";
+import { useRef } from "react";
 
 export const Landing = () => {
+  const heroSection = useRef<HTMLDivElement>(null);
+
   return (
     <div className={css.landing}>
-      <Header />
-      <section className={css.hero}>
+      <Header alwaysVisible={false} dependencyBlock={heroSection}/>
+      <section className={css.hero} ref={heroSection}>
         <StarsContainer />
         <div className={css.title}>
           <h1>I-Dentity</h1>
@@ -18,7 +21,7 @@ export const Landing = () => {
           </p>
         </div>
         <div className={css.uploadWrapper}>
-          <UploadButton />
+          <UploadButton title="Загрузить изображение" />
         </div>
       </section>
 
