@@ -8,21 +8,23 @@ type AuthModalProps = {
 };
 
 export const AuthModal = ({ mode, onClose }: AuthModalProps) => {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("")
   const isLogin = mode === "login";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       if (isLogin) {
-        await authStore.login(email, password);
+        await authStore.login(username, password);
       } else {
-        await authStore.register(email, password);
+        await authStore.register(username, email, password);
       }
       onClose();
     } catch (err: any) {
-      alert(err.message);
+      setError(`Ошибка: ${err.message}`);
     }
   };
 
@@ -35,12 +37,20 @@ export const AuthModal = ({ mode, onClose }: AuthModalProps) => {
       <div className={css.modal} onClick={(e) => e.stopPropagation()}>
         <h2 className={css.modalTitle}>{isLogin ? "Вход" : "Регистрация"}</h2>
         <form onSubmit={handleSubmit}>
-          <input
+          {!isLogin && <input
             type="email"
             className={css.input}
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
+          />}
+          <input
+            type="text"
+            className={css.input}
+            placeholder="Логин"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             required
           />
           <input
@@ -51,15 +61,20 @@ export const AuthModal = ({ mode, onClose }: AuthModalProps) => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button type="submit" className={css.button}>{isLogin ? "Войти" : "Зарегистрироваться"}</button>
+          <button type="submit" className={css.button}>
+            {isLogin ? "Войти" : "Зарегистрироваться"}
+          </button>
+          <p className={css.error}>{error}</p>
           <p className={css.modalBottom}>
-          {mode === "login" ? "Нет аккаунта?" : "Уже есть аккаунт?"}
-          <span className={css.actionCall} onClick={toggleMode}>
-            {mode === "login" ? "Зарегистрироваться" : "Войти"}
-          </span>
-        </p>
+            {mode === "login" ? "Нет аккаунта?" : "Уже есть аккаунт?"}
+            <span className={css.actionCall} onClick={toggleMode}>
+              {mode === "login" ? "Зарегистрироваться" : "Войти"}
+            </span>
+          </p>
         </form>
-        <button className={css.close} onClick={onClose}>×</button>
+        <button className={css.close} onClick={onClose}>
+          ×
+        </button>
       </div>
     </div>
   );

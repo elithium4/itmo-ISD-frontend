@@ -27,29 +27,29 @@ class AuthStore {
     localStorage.removeItem("token");
   }
 
-  async login(email: string, password: string) {
-    const res = await fetch("/api/login", {
+  async login(username: string, password: string) {
+    const res = await fetch(`${import.meta.env.VITE_FRONTEND_URL}/auth/sign-in`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ username, password, rememberMe: true }),
     });
     const data = await res.json();
-    if (res.ok && data.token) {
-      this.setToken(data.token);
+    if (res.ok && data.jwtToken) {
+      this.setToken(data.jwtToken);
       return true;
     }
     throw new Error(data.message || "Ошибка входа");
   }
 
-  async register(email: string, password: string) {
-    const res = await fetch("/api/register", {
+  async register(username: string, email: string, password: string) {
+    const res =  await fetch(`${import.meta.env.VITE_FRONTEND_URL}/auth/sign-up`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ username, email, password }),
     });
     const data = await res.json();
-    if (res.ok && data.token) {
-      this.setToken(data.token);
+    if (res.ok && data.jwtToken) {
+      this.setToken(data.jwtToken);
       return true;
     }
     throw new Error(data.message || "Ошибка регистрации");

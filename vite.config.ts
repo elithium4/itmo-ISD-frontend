@@ -17,7 +17,18 @@ export default defineConfig({
         rewrite: (path) => path,
         configure: (proxy) => {
           proxy.on("proxyReq", (req) => {
-            req.setHeader("Origin", process.env.FRONTEND_PROXY_URL);
+            req.setHeader("Origin", process.env.FRONTEND_PROXY_URL ?? "");
+          });
+        }
+      },
+      '/auth': {
+        target: process.env.BACKEND_URL,
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path,
+        configure: (proxy) => {
+          proxy.on("proxyReq", (req) => {
+            req.setHeader("Origin", process.env.FRONTEND_PROXY_URL ?? "");
           });
         }
       }
