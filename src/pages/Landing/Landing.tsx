@@ -48,15 +48,15 @@ export const Landing = observer(function Landing() {
       <section className={css.pipeline}>
         <h2>Как это работает</h2>
         <div className={css.steps}>
-          <div className={css.step}>
+          <div className={`${css.step} ${css.upload}`}>
             <h3>1</h3>
             <p>Загрузка изображения</p>
           </div>
-          <div className={css.step}>
+          <div className={`${css.step} ${css.analyze}`}>
             <h3>2</h3>
             <p>Анализ с помощью AI-модели</p>
           </div>
-          <div className={css.step}>
+          <div className={`${css.step} ${css.result}`}>
             <h3>3</h3>
             <p>Вывод результата</p>
           </div>
