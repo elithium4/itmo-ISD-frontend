@@ -5,7 +5,7 @@ import css from "./Result.module.scss";
 import { Header } from "../../components/Header/Header";
 import { useEffect } from "react";
 import Loader from "./loader.svg?react";
-import { UploadButton } from "../../components/UploadButton";
+import { UploadButton } from "../../components/UploadButton/UploadButton";
 
 export const ResultPage = observer(() => {
   const navigate = useNavigate();
