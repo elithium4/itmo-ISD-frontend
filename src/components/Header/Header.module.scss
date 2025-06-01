@@ -12,6 +12,11 @@
     z-index: 1000;
     animation: fadeSlideDown 0.3s ease forwards;
   
+    .welcome {
+      color: #0f2027;
+      display: block;
+      align-self: center;
+    }
   
     .actions {
       display: flex;

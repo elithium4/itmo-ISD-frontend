@@ -1,7 +1,12 @@
 @use "sass:math";
 
 .landing {
-  background: radial-gradient(ellipse at bottom, #305877 0%, #0c0014 50%, #12031d 100%);
+  background: radial-gradient(
+    ellipse at bottom,
+    #305877 0%,
+    #0c0014 50%,
+    #12031d 100%
+  );
   font-family: "Segoe UI", sans-serif;
   color: #0d0d0d;
 
@@ -12,7 +17,12 @@
 
   .hero {
     overflow: hidden;
-    background: radial-gradient(ellipse at bottom, #305877 0%, #0c0014 50%, #12031d 100%);
+    background: radial-gradient(
+      ellipse at bottom,
+      #305877 0%,
+      #0c0014 50%,
+      #12031d 100%
+    );
 
     color: white;
     padding: 6rem 2rem 5rem;
@@ -63,7 +73,9 @@
         padding: 2rem;
         border-radius: 12px;
         width: 200px;
-        transition: 0.3s ease;
+        transition: 0.5s ease;
+        position: relative;
+        overflow: hidden;
 
         h3 {
           font-size: 2.5rem;
@@ -77,6 +89,41 @@
         &:hover {
           background-color: #e0e0e0;
         }
+
+        &:hover::after {
+          opacity: 1;
+        }
+
+        &::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background-repeat: repeat;
+          background-size: 60px;
+          opacity: 0;
+          transform: rotate(-45deg);
+          z-index: 0;
+          transition: opacity 0.5s ease;
+          pointer-events: none;
+          filter: opacity(0.1);
+          width: 200%;
+          height: 200%;
+          left: -50%;
+          top: -50%;
+        }
+      }
+
+      .upload::after {
+        background-image: url("/icons/upload.svg");
+      }
+
+      .analyze::after {
+        transform: rotate(0);
+        background-image: url("/icons/analyze.svg");
+      }
+
+      .result::after {
+        background-image: url("/icons/result.svg");
       }
     }
   }
