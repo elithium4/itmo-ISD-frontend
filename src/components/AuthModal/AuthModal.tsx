@@ -47,6 +47,8 @@ export const AuthModal = ({ mode, onClose }: AuthModalProps) => {
           />}
           <input
             type="text"
+            minLength={5}
+            maxLength={50}
             className={css.input}
             placeholder="Логин"
             value={username}
@@ -55,6 +57,8 @@ export const AuthModal = ({ mode, onClose }: AuthModalProps) => {
           />
           <input
             type="password"
+            minLength={8}
+            maxLength={255}
             className={css.input}
             placeholder="Пароль"
             value={password}

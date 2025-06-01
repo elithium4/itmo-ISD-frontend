@@ -3,6 +3,7 @@ import Logo from "./Logo.svg?react";
 import css from "./Header.module.scss";
 import { observer } from "mobx-react-lite";
 import { authStore } from "../../store/auth";
+import { useNavigate } from "react-router-dom";
 
 type HeaderProps = {
   alwaysVisible: boolean;
@@ -14,6 +15,7 @@ export const Header = observer(function Header({
   dependencyBlock,
 }: HeaderProps) {
   const [showHeader, setShowHeader] = useState(alwaysVisible);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (alwaysVisible) return;
@@ -27,6 +29,11 @@ export const Header = observer(function Header({
     return () => window.removeEventListener("scroll", handleScroll);
   }, [alwaysVisible]);
 
+  const logOut = () => {
+    authStore.logout();
+    navigate("/");
+  }
+
   return showHeader ? (
     <header className={css.Header}>
       <a className={css.logo} href="/">
@@ -36,7 +43,7 @@ export const Header = observer(function Header({
         {authStore.isAuthenticated ? (
           <>
             <span className={css.welcome}>Вы вошли</span>
-            <button className={css.logout} onClick={() => authStore.logout()}>
+            <button className={css.logout} onClick={logOut}>
               Выйти
             </button>
           </>
