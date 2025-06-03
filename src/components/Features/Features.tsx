@@ -1,9 +1,10 @@
 import { useEffect, useRef } from "react";
 import css from "./Feature.module.scss"; 
+import { useTranslation } from "react-i18next";
 
 export const Features = () => {
   const featureRefs = useRef<HTMLDivElement[]>([]);
-
+  const {t} = useTranslation();
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -33,27 +34,27 @@ export const Features = () => {
 
   return (
     <section className={css.features}> 
-      <h2>Наши преимущества</h2>
+      <h2>{t("Landing.Features.advantages")}</h2>
       <div className={css.featureList}>
         {[
           {
-            title: "Высокая точность",
-            text: "Модель показывает более 98% точности при детекции дипфейков",
+            title: t("Landing.Features.accuracy"),
+            text: t("Landing.Features.accuracyDetail"),
             side: "left",
           },
           {
-            title: "Мгновенная проверка",
-            text: "Вы получаете результат почти сразу — за считаные секунды",
+            title: t("Landing.Features.instantCheck"),
+            text: t("Landing.Features.instantCheckDetail"),
             side: "right",
           },
           {
-            title: "Интеллектуальная аналитика",
-            text: "вы получаете вероятность подделки в процентах — чтобы понимать, насколько фото вызывает сомнения",
+            title: t("Landing.Features.intellegentAnalysis"),
+            text: t("Landing.Features.intellegentAnalysisDetail"),
             side: "left",
           },
           {
-            title: "Кроссплатформенность",
-            text: "Удобно пользоваться как на компьютере, так и с телефона — неважно, где вы находитесь",
+            title: t("Landing.Features.crossPlatform"),
+            text: t("Landing.Features.crossPlatformDetail"),
             side: "right",
           },
         ].map((feature, index) => (

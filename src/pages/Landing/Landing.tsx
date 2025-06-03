@@ -7,10 +7,12 @@ import { useRef } from "react";
 import { authStore } from "../../store/auth";
 import { AuthModal } from "../../components/AuthModal/AuthModal";
 import { observer } from "mobx-react-lite";
+import { useTranslation } from "react-i18next";
 
 export const Landing = observer(function Landing() {
   const heroSection = useRef<HTMLDivElement>(null);
-
+  const {t} = useTranslation();
+  
   return (
     <div className={css.landing}>
       {authStore.authModalMode && (
@@ -25,8 +27,7 @@ export const Landing = observer(function Landing() {
         <div className={css.title}>
           <h1>I-Dentity</h1>
           <p>
-            AI-платформа для валидации изображений и выявления дипфейков с
-            высокой точностью
+            {t("Landing.tagline")}
           </p>
         </div>
         <div className={css.uploadWrapper}>
@@ -35,30 +36,26 @@ export const Landing = observer(function Landing() {
       </section>
 
       <section className={css.about}>
-        <h2>О нас</h2>
+        <h2>{t("Landing.aboutUsTitle")}</h2>
         <p>
-          I-Dentity — это система валидации изображений нового поколения. Мы
-          используем передовые методы машинного обучения для анализа фотографий
-          и определения их подлинности. Наша модель обучена на большом
-          количестве дипфейков и реальных изображений, что позволяет достигать
-          точности более 98%.
+        {t("Landing.aboutUsContent")}
         </p>
       </section>
 
       <section className={css.pipeline}>
-        <h2>Как это работает</h2>
+        <h2>{t("Landing.howItWorks")}</h2>
         <div className={css.steps}>
           <div className={`${css.step} ${css.upload}`}>
             <h3>1</h3>
-            <p>Загрузка изображения</p>
+            <p>{t("Landing.loadImage")}</p>
           </div>
           <div className={`${css.step} ${css.analyze}`}>
             <h3>2</h3>
-            <p>Анализ с помощью AI-модели</p>
+            <p>{t("Landing.aiAnalysis")}</p>
           </div>
           <div className={`${css.step} ${css.result}`}>
             <h3>3</h3>
-            <p>Вывод результата</p>
+            <p>{t("Landing.showResults")}</p>
           </div>
         </div>
       </section>

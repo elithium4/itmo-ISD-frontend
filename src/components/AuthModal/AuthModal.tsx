@@ -23,8 +23,8 @@ export const AuthModal = ({ mode, onClose }: AuthModalProps) => {
         await authStore.register(username, email, password);
       }
       onClose();
-    } catch (err: any) {
-      setError(`Ошибка: ${err.message}`);
+    } catch (err: unknown) {
+      setError(`Ошибка: ${(err as Error).message}`);
     }
   };
 
