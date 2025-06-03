@@ -1,6 +1,7 @@
 import { useState } from "react";
 import css from "./AuthModal.module.scss";
 import { authStore } from "../../store/auth";
+import { useTranslation } from "react-i18next";
 
 type AuthModalProps = {
   mode: "login" | "register";
@@ -12,6 +13,7 @@ export const AuthModal = ({ mode, onClose }: AuthModalProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("")
+  const {t} = useTranslation();
   const isLogin = mode === "login";
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -24,7 +26,7 @@ export const AuthModal = ({ mode, onClose }: AuthModalProps) => {
       }
       onClose();
     } catch (err: unknown) {
-      setError(`Ошибка: ${(err as Error).message}`);
+      setError(t("Auth.error", {errorText: (err as Error).message}));
     }
   };
 
@@ -40,7 +42,7 @@ export const AuthModal = ({ mode, onClose }: AuthModalProps) => {
           {!isLogin && <input
             type="email"
             className={css.input}
-            placeholder="Email"
+            placeholder={t("Auth.email")}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -50,7 +52,7 @@ export const AuthModal = ({ mode, onClose }: AuthModalProps) => {
             minLength={5}
             maxLength={50}
             className={css.input}
-            placeholder="Логин"
+            placeholder={t("Auth.login")}
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
@@ -60,19 +62,19 @@ export const AuthModal = ({ mode, onClose }: AuthModalProps) => {
             minLength={8}
             maxLength={255}
             className={css.input}
-            placeholder="Пароль"
+            placeholder={t("Auth.password")}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
           <button type="submit" className={css.button}>
-            {isLogin ? "Войти" : "Зарегистрироваться"}
+            {isLogin ? t("Auth.signIn") : t("Auth.signUp")}
           </button>
           <p className={css.error}>{error}</p>
           <p className={css.modalBottom}>
-            {mode === "login" ? "Нет аккаунта?" : "Уже есть аккаунт?"}
+            {mode === "login" ? t("Auth.notRegistered") :  t("Auth.haveAccount")}
             <span className={css.actionCall} onClick={toggleMode}>
-              {mode === "login" ? "Зарегистрироваться" : "Войти"}
+              {mode === "login" ? t("Auth.signUp") :  t("Auth.signIn")}
             </span>
           </p>
         </form>

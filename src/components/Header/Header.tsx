@@ -4,6 +4,7 @@ import css from "./Header.module.scss";
 import { observer } from "mobx-react-lite";
 import { authStore } from "../../store/auth";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 type HeaderProps = {
   alwaysVisible: boolean;
@@ -16,6 +17,7 @@ export const Header = observer(function Header({
 }: HeaderProps) {
   const [showHeader, setShowHeader] = useState(alwaysVisible);
   const navigate = useNavigate();
+  const {t} = useTranslation();
 
   useEffect(() => {
     if (alwaysVisible) return;
@@ -42,21 +44,21 @@ export const Header = observer(function Header({
       <div className={css.actions}>
         {authStore.isAuthenticated ? (
           <>
-            <span className={css.welcome}>Вы вошли</span>
+            <span className={css.welcome}>{t("Header.loggedIn")}</span>
             <button className={css.logout} onClick={logOut}>
-              Выйти
+              {t("Header.signOut")}
             </button>
           </>
         ) : (
           <>
             <button className={css.login} onClick={() => authStore.setAuthModalMode("login")}>
-              Войти
+            {t("Header.signIn")}
             </button>
             <button
               className={css.register}
               onClick={() => authStore.setAuthModalMode("register")}
             >
-              Регистрация
+              {t("Header.signUp")}
             </button>
           </>
         )}

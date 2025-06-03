@@ -31,7 +31,7 @@ export const Landing = observer(function Landing() {
           </p>
         </div>
         <div className={css.uploadWrapper}>
-          <UploadButton title="Загрузить изображение" />
+          <UploadButton title={t("Landing.uploadImage")} />
         </div>
       </section>
 
