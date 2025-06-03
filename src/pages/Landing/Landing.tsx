@@ -3,16 +3,21 @@ import { UploadButton } from "../../components/UploadButton/UploadButton";
 import { Header } from "../../components/Header/Header";
 import { Features } from "../../components/Features/Features";
 import { StarsContainer } from "../../components/StarsContainer/StarsContainer";
-import { useRef } from "react";
+import {  useRef } from "react";
 import { authStore } from "../../store/auth";
 import { AuthModal } from "../../components/AuthModal/AuthModal";
 import { observer } from "mobx-react-lite";
 import { useTranslation } from "react-i18next";
+import PipelineSection from "../../components/Pipeline/Pipeline";
+import { Footer } from "../../components/Footer/Footer";
 
 export const Landing = observer(function Landing() {
   const heroSection = useRef<HTMLDivElement>(null);
-  const {t} = useTranslation();
+  const {t } = useTranslation();
   
+
+
+
   return (
     <div className={css.landing}>
       {authStore.authModalMode && (
@@ -42,28 +47,9 @@ export const Landing = observer(function Landing() {
         </p>
       </section>
 
-      <section className={css.pipeline}>
-        <h2>{t("Landing.howItWorks")}</h2>
-        <div className={css.steps}>
-          <div className={`${css.step} ${css.upload}`}>
-            <h3>1</h3>
-            <p>{t("Landing.loadImage")}</p>
-          </div>
-          <div className={`${css.step} ${css.analyze}`}>
-            <h3>2</h3>
-            <p>{t("Landing.aiAnalysis")}</p>
-          </div>
-          <div className={`${css.step} ${css.result}`}>
-            <h3>3</h3>
-            <p>{t("Landing.showResults")}</p>
-          </div>
-        </div>
-      </section>
+      <PipelineSection/>
       <Features />
-      <footer className={css.footer}>
-        <StarsContainer />
-        <p>© 2025 I-Dentity</p>
-      </footer>
+      <Footer/>
     </div>
   );
 });

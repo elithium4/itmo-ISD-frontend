@@ -1,0 +1,29 @@
+.footer {
+    color: #ccc;
+    padding: 2rem;
+    font-size: 0.9rem;
+    overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
+
+    .footerContent {
+        display: flex;
+        justify-content: space-between;
+
+        button {
+            background: none;
+            border: none;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+      
+            &:hover {
+              background-color: #fff;
+              color: #0f2027;
+            }
+          }
+    }
+}

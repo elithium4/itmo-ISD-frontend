@@ -1,0 +1,110 @@
+.pipeline {
+    background-color: #ffffff;
+
+    h2 {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .steps {
+        display: flex;
+        justify-content: center;
+        gap: 3rem;
+        flex-wrap: wrap;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+
+        .step {
+            background-color: #f1f1f1;
+            padding: 2rem;
+            border-radius: 12px;
+            width: 200px;
+            flex-shrink: 0;
+            transition: 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            scroll-snap-align: start;
+
+            h3 {
+                font-size: 2.5rem;
+                margin-bottom: 1rem;
+            }
+
+            p {
+                font-size: 1.1rem;
+            }
+
+            &:hover {
+                background-color: #e0e0e0;
+            }
+
+            &::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background-repeat: repeat;
+                background-size: 60px;
+                opacity: 0;
+                transform: rotate(-45deg);
+                z-index: 0;
+                transition: opacity 0.5s ease;
+                pointer-events: none;
+                filter: opacity(0.1);
+                width: 200%;
+                height: 200%;
+                left: -50%;
+                top: -50%;
+            }
+
+            &:hover::after {
+                opacity: 1;
+            }
+        }
+
+        .upload::after {
+            background-image: url("/icons/upload.svg");
+        }
+
+        .analyze::after {
+            transform: rotate(0);
+            background-image: url("/icons/analyze.svg");
+        }
+
+        .result::after {
+            background-image: url("/icons/result.svg");
+        }
+    }
+
+    @keyframes pulseBgImage {
+        0%,
+        100% {
+            opacity: 0.3;
+        }
+        50% {
+            opacity: 0.7;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .steps {
+            flex-wrap: nowrap;
+            gap: 1rem;
+            justify-content: left;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        .step {
+            flex-shrink: 0;
+            width: 200px;
+            scroll-snap-align: start;
+
+        }
+        .upload::after, .analyze::after, .result::after {
+            animation: pulseBgImage 3s ease-in-out infinite;
+        }
+    }
+}

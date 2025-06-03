@@ -37,7 +37,7 @@ export const AuthModal = ({ mode, onClose }: AuthModalProps) => {
   return (
     <div className={css.overlay} onClick={onClose}>
       <div className={css.modal} onClick={(e) => e.stopPropagation()}>
-        <h2 className={css.modalTitle}>{isLogin ? "Вход" : "Регистрация"}</h2>
+        <h2 className={css.modalTitle}>{isLogin ? t("Auth.signInTitle") : t("Auth.signUpTitle")}</h2>
         <form onSubmit={handleSubmit}>
           {!isLogin && <input
             type="email"

@@ -1,12 +1,13 @@
 .page {
-    padding: 4rem 2rem;
+    padding: 12rem 2rem 0;
     font-family: "Segoe UI", sans-serif;
     display: flex;
-    justify-content: center;
-    align-items: start;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     color: #fff;
     height: 100%;
-    padding-top: 12rem;
+    flex-grow: 1;
 
     .loadingIndicator {
         display: flex;

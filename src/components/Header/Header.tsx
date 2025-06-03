@@ -39,7 +39,7 @@ export const Header = observer(function Header({
   return showHeader ? (
     <header className={css.Header}>
       <a className={css.logo} href="/">
-        <Logo />
+        <Logo className={css.logoSvg} />
       </a>
       <div className={css.actions}>
         {authStore.isAuthenticated ? (
