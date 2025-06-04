@@ -1,0 +1,65 @@
+{
+    "Landing": {
+      "tagline": "An AI platform for image validation and deepfake detection with high accuracy",
+      "aboutUsTitle": "About Us",
+      "aboutUsContent": "I-Dentity is a next-generation image validation system. We use advanced machine learning techniques to analyze photos and determine their authenticity. Our model is trained on a large number of deepfakes and real images, achieving over 98% accuracy.",
+      "howItWorks": "How It Works",
+      "loadImage": "Upload Image",
+      "aiAnalysis": "AI-Powered Analysis",
+      "uploadImage": "Upload Image",
+      "showResults": "View Results",
+      "Features": {
+        "advantages": "Our Advantages",
+        "accuracy": "High Accuracy",
+        "accuracyDetail": "The model achieves over 98% accuracy in deepfake detection",
+        "instantCheck": "Instant Check",
+        "instantCheckDetail": "You get results almost instantly — within seconds",
+        "intellegentAnalysis": "Intelligent Analytics",
+        "intellegentAnalysisDetail": "You receive the likelihood of forgery in percent — to understand how suspicious the image is",
+        "crossPlatform": "Cross-Platform",
+        "crossPlatformDetail": "Easy to use on both desktop and mobile — no matter where you are"
+      }
+    },
+    "Result": {
+      "processing": "Analyzing the image...",
+      "oops": "Oops!",
+      "errorMessage": "An error occurred during image analysis :(",
+      "noFaceDetected": "No face detected in the image",
+      "retry": "Try Again",
+      "loadedImage": "Uploaded Image",
+      "analysisResult": "Analysis Result",
+      "uploadedImage": "Uploaded Image",
+      "isDeepfake": "Deepfake Detected",
+      "isReal": "Image is Real",
+      "couldBeDeepfake": "The image might be a deepfake",
+      "looksReal": "The image looks real",
+      "probability": "Probability: {{ p }}%",
+      "checkOther": "Check Another Image",
+      "aboutDeepfake": "*A deepfake is a realistic fake of a photo, video, or audio created by artificial intelligence. The technology allows replacing a person’s face, voice, or movements, making fake content nearly indistinguishable from the real thing."
+    },
+    "Header": {
+      "signIn": "Sign In",
+      "signUp": "Sign Up",
+      "signOut": "Sign Out",
+      "loggedIn": "You are signed in"
+    },
+    "Auth": {
+      "email": "Email",
+      "login": "Username",
+      "password": "Password",
+      "notRegistered": "Don't have an account?",
+      "haveAccount": "Already have an account?",
+      "signIn": "Sign In",
+      "signUp": "Sign Up",
+      "signInTitle": "Sign In",
+      "signUpTitle": "Sign Up",
+      "error": "Error: {{errorText}}",
+      "signUpError": "Failed to sign up",
+      "emailIsTaken": "This email has already been used to register",
+      "usernameIsTaken": "Username is already taken",
+      "signInError": "Sign-in error",
+      "userNotFound": "No user registered with this username",
+      "badCredentials": "Incorrect username or password"
+    }
+  }
+  

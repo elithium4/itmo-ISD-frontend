@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Landing } from "./pages/Landing/Landing.tsx";
 import { ResultPage } from "./pages/Result/Result.tsx";
 import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute.tsx";
+import './i18n';
 
 const router = createBrowserRouter([
   { path: "/", element: <Landing /> },

@@ -1,4 +1,27 @@
 import { makeAutoObservable } from "mobx";
+import i18n from "../i18n";
+
+const getSignInErrorMessage = (message?: string) => {
+  switch (message) {
+    case "User not found":
+      return i18n.t("Auth.userNotFound");
+    case "Bad credentials":
+      return i18n.t("Auth.badCredentials");
+    default:
+      return i18n.t("Auth.signInError");
+  }
+};
+
+const getSignUpErrorMessage = (message: string) => {
+  switch (message) {
+    case "User with this username already exists":
+      return i18n.t("Auth.usernameIsTaken");
+    case "User with this email already exists":
+      return i18n.t("Auth.emailIsTaken");
+    default:
+      return i18n.t("Auth.signUpError");
+  }
+};
 
 class AuthStore {
   token: string | null = localStorage.getItem("token");
@@ -21,9 +44,17 @@ class AuthStore {
     localStorage.setItem("token", token);
   }
 
-  logout() {
-    this.token = null;
-    localStorage.removeItem("token");
+  async logout() {
+    const token = localStorage.getItem("token");
+    fetch(`${import.meta.env.VITE_FRONTEND_URL}/auth/logout`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then(() => {
+      this.token = null;
+      localStorage.removeItem("token");
+    });
   }
 
   async login(username: string, password: string) {
@@ -40,17 +71,7 @@ class AuthStore {
       this.setToken(data.jwtToken);
       return true;
     }
-    let message = "Ошибка входа";
-    switch (data.message) {
-      case "User not found":
-        message = "Пользователь с таким именем не зарегистрирован";
-        break;
-      case "Bad credentials":
-        message = "Неверный логин или пароль";
-        break;
-      default:
-        break;
-    }
+    let message = getSignInErrorMessage(data.message);
     throw new Error(message);
   }
 
@@ -68,17 +89,7 @@ class AuthStore {
       this.setToken(data.jwtToken);
       return true;
     }
-    let message = "Не удалось выполнить регистрацию";
-    switch (data.message) {
-      case "User with this username already exists":
-        message = "Имя пользователя уже занято";
-        break;
-      case "User with this email already exists":
-        message = "Email уже был использован для регистрации"
-        break;
-      default:
-        break;
-    }
+    let message = getSignUpErrorMessage(data.message);
     throw new Error(message);
   }
 }

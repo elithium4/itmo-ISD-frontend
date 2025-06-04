@@ -1,15 +1,17 @@
 import { observer } from "mobx-react-lite";
-import { ValidationResult, validationStore } from "../../store/validation";
+import { ErrorType, ValidationResult, validationStore } from "../../store/validation";
 import { useNavigate } from "react-router-dom";
 import css from "./Result.module.scss";
 import { Header } from "../../components/Header/Header";
 import { useEffect } from "react";
 import Loader from "./loader.svg?react";
 import { UploadButton } from "../../components/UploadButton/UploadButton";
+import { useTranslation } from "react-i18next";
+import { Footer } from "../../components/Footer/Footer";
 
 export const ResultPage = observer(() => {
   const navigate = useNavigate();
-  const { file, result, loading } = validationStore;
+  const { file, result, loading, errorStatus } = validationStore;
 
   useEffect(() => {
     if (!file) {
@@ -22,7 +24,7 @@ export const ResultPage = observer(() => {
       return <Loading />;
     }
     if (!loading && result === null) {
-      return <ErrorMessage />;
+      return <ErrorMessage details={errorStatus}/>;
     }
     if (!loading && file && result) {
       return <ValidationView file={file} validationData={result} />;
@@ -34,30 +36,42 @@ export const ResultPage = observer(() => {
     <div className={css.page}>
       <Header alwaysVisible />
       {getPageBodyComponent()}
+      <Footer/>
     </div>
   );
 });
 
 const Loading = () => {
+  const {t} = useTranslation();
   return (
     <div className={css.loadingIndicator}>
       <div className={css.loaderContainer}>
         <Loader />
       </div>
-      Анализируем изображение...
+      {t("Result.processing")}
     </div>
   );
 };
 
-const ErrorMessage = ({details}:{details?: string}) => {
+const ErrorMessage = ({details}:{details?: null | ErrorType}) => {
+  const {t} = useTranslation();
+  const getErrorMessage = () => {
+    switch (details) {
+      case ErrorType.NoFaceDetected:
+        return t("Result.noFaceDetected")
+      default:
+        return ""
+    }
+  }
+
   return (
     <div className={css.ErrorMessage}>
       <div className={css.warning}>
-      <p className={css.title}>Ой!</p>
-      <p className={css.info}>Произошла ошибка во время анализа изображения :(</p>
-      {details && <p>{details}</p>}
+      <p className={css.title}>{t("Result.oops")}</p>
+      <p className={css.info}>{t("Result.errorMessage")}</p>
+      {details && <p>{getErrorMessage()}</p>}
       </div>
-      <UploadButton title="Попробовать еще раз" />
+      <UploadButton title={t("Result.retry")} />
     </div>
   );
 };
@@ -70,9 +84,10 @@ const ValidationView = ({
   file: File;
 }) => {
   const { result, probability } = validationData;
+  const {t} = useTranslation();
 
   const imageURL = URL.createObjectURL(file);
-  const isFake = result === "fake";
+  const isFake = result === "Fake";
 
   return (
     <div className={css.container}>
@@ -81,26 +96,26 @@ const ValidationView = ({
           isFake ? css.glowFake : css.glowReal
         }`}
       >
-        <img src={imageURL} alt="Загруженное изображение" />
+        <img src={imageURL} alt={t("Result.loadedImage")} />
       </div>
 
       <div className={css.infoContainer}>
-        <h2 className={css.resultTitle}>Результат анализа</h2>
+        <h2 className={css.resultTitle}>{t("Result.analysisResult")}</h2>
         <div className={`${css.status} ${isFake ? css.fake : css.real}`}>
-          {isFake ? "Обнаружен дипфейк" : "Изображение подлинное"}
+          {isFake ? t("Result.isDeepfake") : t("Result.isReal")}
         </div>
         <p className={css.resultComment}>
           {isFake
-            ? "Изображение может являться дипфейком"
-            : "Изображение выглядит настоящим"}
+            ? t("Result.couldBeDeepfake")
+            : t("Result.looksReal")}
         </p>
         <p className={css.details}>
-          Вероятность: {(probability * 100).toFixed(1)}%
+          {t("Result.probability", {p : (probability * 100).toFixed(1)})}
         </p>
-        <UploadButton title="Проверить другое изображение" />
+        <UploadButton title={t("Result.checkOther")} />
       </div>
       <p className={css.description}>
-      *Дипфейк — это реалистичная подделка фото, видео или аудио, созданная искусственным интеллектом. Технология позволяет заменить лицо, голос или движения человека, делая фальшивый контент почти неотличимым от настоящего. 
+      {t("Result.aboutDeepfake")}
       </p>
     </div>
   );
