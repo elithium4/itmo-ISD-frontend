@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import css from "./Footer.module.scss";
 import { StarsContainer } from "../StarsContainer/StarsContainer";
 
-export const Footer = () => {
+export const Footer = ({withStars}:{withStars?: boolean}) => {
   const { i18n } = useTranslation();
   const [lang, setLang] = useState("en");
 
@@ -24,7 +24,7 @@ export const Footer = () => {
 
   return (
     <footer className={css.footer}>
-      <StarsContainer />
+      {withStars && <StarsContainer />}
       <div className={css.footerContent}>
         <p>© 2025 I-Dentity</p>
         <button className={css.langToggle} onClick={toggleLanguage}>

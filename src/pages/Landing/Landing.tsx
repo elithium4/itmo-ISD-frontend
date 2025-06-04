@@ -49,7 +49,7 @@ export const Landing = observer(function Landing() {
 
       <PipelineSection/>
       <Features />
-      <Footer/>
+      <Footer withStars/>
     </div>
   );
 });
